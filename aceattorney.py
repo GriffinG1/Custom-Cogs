@@ -21,8 +21,8 @@ class AceAttorney:
         await self.bot.send_message(ctx.message.channel, content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="https://i.imgur.com/KBWpDpW.png"))
         await self.bot.send_message(ctx.message.channel, content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="https://i.imgur.com/BixOUBV.png"))
         
-    @commands.command()
-    async def holytext(self):
+    @commands.command(pass_context=True)
+    async def holytext(self, ctx):
         """Edgeworth's Response (text)"""
         await self.bot.delete_message(ctx.message)
         embed = discord.Embed(title="Miles Edgeworth", color=discord.Color.blue())
