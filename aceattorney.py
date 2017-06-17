@@ -53,5 +53,35 @@ class AceAttorney:
         await self.bot.delete_message(ctx.message)
         await self.bot.send_message(ctx.message.channel, content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/AxbuzZ9.png"))
         
+    @commands.command(pass_context=True)
+    async def gotcha(self, ctx):
+        """GOTCHA!"""
+        await self.bot.delete_message(ctx.message)
+        await self.bot.send_message(ctx.message.channel, content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/29ZvDWm.png"))
+        
+    @commands.command(pass_context=True)
+    async def enough(self, ctx):
+        """ENOUGH!"""
+        await self.bot.delete_message(ctx.message)
+        await self.bot.send_message(ctx.message.channel, content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/paNw1dh.png"))
+        
+    @commands.command(pass_context=True)
+    async def fast(self, ctx):
+        """NOT SO FAST!"""
+        await self.bot.delete_message(ctx.message)
+        await self.bot.send_message(ctx.message.channel, content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/Nab2PLO.png"))
+        
+    @commands.command(pass_context=True)
+    async def got(self, ctx):
+        """GOT IT!"""
+        await self.bot.delete_message(ctx.message)
+        await self.bot.send_message(ctx.message.channel, content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/J3X6Fbd.png"))
+        
+    @commands.command(pass_context=True)
+    async def eureka(self, ctx):
+        """EUREKA!"""
+        await self.bot.delete_message(ctx.message)
+        await self.bot.send_message(ctx.message.channel, content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/O8gVn3q.png"))
+
 def setup(bot):
     bot.add_cog(AceAttorney(bot))
