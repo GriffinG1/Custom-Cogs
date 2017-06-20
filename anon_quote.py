@@ -71,4 +71,4 @@ class AnonQuote:
             await self.bot.send_message(ctx.message.channel, bot_prefix + 'No quote found.')
             
 def setup(bot):
-    bot.add_cog(NoNameQuoting(bot))
+    bot.add_cog(AnonQuote(bot))
