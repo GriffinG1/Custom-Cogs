@@ -10,16 +10,16 @@ from cogs.utils.checks import *
 
 '''Quoting, without a name or channel'''
 
-class NoNameQuoting:
+class AnonQuote:
     def __init__(self, bot):
         self.bot = bot
     
     @commands.command(pass_context=True)
     async def noquote(self, ctx, *, msg: str = None):
         """Quote a message. >help quote for more info.
-        >quote - quotes the last message sent in the channel.
-        >quote <words> - tries to search for a message in the server that contains the given words and quotes it.
-        >quote <message_id> - quotes the message with the given message id. Ex: >quote 302355374524644290(Enable developer mode to copy message ids)."""
+        >noquote - quotes the last message sent in the channel.
+        >noquote <words> - tries to search for a message in the server that contains the given words and quotes it.
+        >noquote <message_id> - quotes the message with the given message id. Ex: >noquote 302355374524644290(Enable developer mode to copy message ids)."""
         result = channel = None
         await self.bot.delete_message(ctx.message)
         quote_cmd = ctx.message.content.split(' ', 1)[0]
