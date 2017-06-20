@@ -16,7 +16,7 @@ class AnonQuote:
     
     @commands.command(pass_context=True)
     async def noquote(self, ctx, *, msg: str = None):
-        """Quote a message. >help quote for more info.
+        """Quote a message. >help noquote for more info.
         >noquote - quotes the last message sent in the channel.
         >noquote <words> - tries to search for a message in the server that contains the given words and quotes it.
         >noquote <message_id> - quotes the message with the given message id. Ex: >noquote 302355374524644290(Enable developer mode to copy message ids)."""
