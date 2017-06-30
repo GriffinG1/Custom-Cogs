@@ -4,7 +4,6 @@ import random
 import requests
 import json
 from PythonGists import PythonGists
-from appuselfbot import bot_prefix
 from discord.ext import commands
 from cogs.utils.checks import *
 
