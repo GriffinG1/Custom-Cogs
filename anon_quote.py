@@ -13,6 +13,8 @@ from cogs.utils.checks import *
 class AnonQuote:
     def __init__(self, bot):
         self.bot = bot
+        config = load_config()
+        self.bot_prefix = config["bot_identifier"]
     
     @commands.command(pass_context=True)
     async def noquote(self, ctx, *, msg: str = None):
@@ -68,7 +70,7 @@ class AnonQuote:
             else:
                 await self.bot.send_message(ctx.message.channel, '%s - %s```%s```' % (result.author.name, result.timestamp, result.content))
         else:
-            await self.bot.send_message(ctx.message.channel, bot_prefix + 'No quote found.')
+            await self.bot.send_message(ctx.message.channel, self.bot.bot_prefix + 'No quote found.')
             
 def setup(bot):
     bot.add_cog(AnonQuote(bot))
