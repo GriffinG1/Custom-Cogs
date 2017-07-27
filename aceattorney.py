@@ -87,7 +87,7 @@ class AceAttorney:
     async def guilty(self, ctx):
         """GUILTY!"""
         await self.bot.delete_message(ctx.message)
-        await self.bot.send_message(ctx.message.channel, content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/yceLS3l.png"))
+        await self.bot.send_message(ctx.message.channel, content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/TO8Njvb.gif"))
 
     @commands.command(pass_context=True)
     async def notguilty(self, ctx):
