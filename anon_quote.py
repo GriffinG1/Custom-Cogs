@@ -11,7 +11,7 @@ class AnonQuote:
         config = load_config()
         self.bot_prefix = config["bot_identifier"]
     
-    @commands.command(aliases=['q'], pass_context=True)
+    @commands.command(aliases=['noq'], pass_context=True)
     async def noquote(self, ctx, *, msg: str = None):
         """Quote a message. >help quote for more info.
         >noquote - quotes the last message sent in the channel.
