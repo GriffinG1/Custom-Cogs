@@ -14,7 +14,7 @@ class AnonQuote:
     
     @commands.command(aliases=['noq'], pass_context=True)
     async def noquote(self, ctx, *, msg: str = None):
-        """Quote a message. >help quote for more info.
+        """Quote a message, anonymously. >help quote for more info.
         >noquote - quotes the last message sent in the channel.
         >noquote <words> - tries to search for a message in the server that contains the given words and quotes it.
         >noquote <message_id> - quotes the message with the given message id. Ex: >quote 302355374524644290(Enable developer mode to copy message ids).
@@ -91,6 +91,7 @@ class AnonQuote:
                 else:
                     color = int('0x' + color, 16)
                 em = discord.Embed(color=color, description=result.content, timestamp=result.created_at)
+                em.set_author(name="Anonymous")
                 await ctx.send(embed=em)
             else:
                 await ctx.send('%s - %s```%s```' % (sender, result.created_at, result.content))
