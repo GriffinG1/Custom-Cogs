@@ -16,7 +16,10 @@ class Git:
         exit_code = subprocess.call(['git', 'stash'])
         if exit_code:
             return await ctx.send(self.bot.bot_prefix + "Couldn't stash changes. Aborting...")
-        await ctx.send(self.bot.bot_prefix + "Stashed changes to " + branch + ".")
+        if branch = "master"
+            await ctx.send(self.bot.bot_prefix + "Stashed changes to dev.")
+        if branch = "dev"
+            await ctx.send(self.bot.bot_prefix + "Stashed changes to master.")
         exit_code = subprocess.call(['git', 'checkout', branch])
         if exit_code:
             return await ctx.send(self.bot.bot_prefix + "Something went wrong with checking out the branch. Check the console for details.")
