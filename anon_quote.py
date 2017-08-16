@@ -2,6 +2,7 @@ import discord
 import json
 from discord.ext import commands
 from cogs.utils.checks import *
+from cogs.utils.config import get_config_value
 
 '''Quoting, without a name or channel'''
 
