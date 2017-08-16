@@ -12,14 +12,14 @@ class AnonQuote:
         self.bot_prefix = config["bot_identifier"]
     
     @commands.command(aliases=['q'], pass_context=True)
-    async def quote(self, ctx, *, msg: str = None):
+    async def noquote(self, ctx, *, msg: str = None):
         """Quote a message. >help quote for more info.
-        >quote - quotes the last message sent in the channel.
-        >quote <words> - tries to search for a message in the server that contains the given words and quotes it.
-        >quote <message_id> - quotes the message with the given message id. Ex: >quote 302355374524644290(Enable developer mode to copy message ids).
-        >quote <words> | channel=<channel_name> - quotes the message with the given words from the channel name specified in the second argument
-        >quote <message_id> | channel=<channel_name> - quotes the message with the given message id in the given channel name
-        >quote <user_mention_name_or_id> - quotes the last member sent by a specific user"""
+        >noquote - quotes the last message sent in the channel.
+        >noquote <words> - tries to search for a message in the server that contains the given words and quotes it.
+        >noquote <message_id> - quotes the message with the given message id. Ex: >quote 302355374524644290(Enable developer mode to copy message ids).
+        >noquote <words> | channel=<channel_name> - quotes the message with the given words from the channel name specified in the second argument
+        >noquote <message_id> | channel=<channel_name> - quotes the message with the given message id in the given channel name
+        >noquote <user_mention_name_or_id> - quotes the last member sent by a specific user"""
         
         await ctx.message.delete()
         result = None
