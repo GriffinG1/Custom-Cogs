@@ -81,7 +81,6 @@ class AnonQuote:
 
 
         if result:
-            sender = result.author.nick if result.author.nick else result.author.name
             if embed_perms(ctx.message) and result.content:
                 color = get_config_value("optional_config", "quoteembed_color")
                 if color == "auto":
@@ -91,9 +90,6 @@ class AnonQuote:
                 else:
                     color = int('0x' + color, 16)
                 em = discord.Embed(color=color, description=result.content, timestamp=result.created_at)
-                em.set_author(name=sender, icon_url=result.author.avatar_url)
-                if channel != ctx.message.channel:
-                    em.set_footer(text='#{} | {} '.format(channel.name, channel.guild.name))
                 await ctx.send(embed=em)
             else:
                 await ctx.send('%s - %s```%s```' % (sender, result.created_at, result.content))
