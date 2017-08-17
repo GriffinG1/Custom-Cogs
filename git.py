@@ -18,17 +18,19 @@ class Git:
             g = git.cmd.Git(working_dir=os.getcwd())
             branchversion = g.execute(["git", "rev-parse", "--abbrev-ref", "HEAD"])
             if branch != branchversion:
-                exit_code = subprocess.call(['git', 'stash'])
-                if exit_code:
-                    return await ctx.send(self.bot.bot_prefix + "Couldn't stash changes. Aborting...")
-                await ctx.send(self.bot.bot_prefix + "Stashed changes to " + branchversion + ".")
-                exit_code = subprocess.call(['git', 'checkout', branch])
-                if exit_code:
-                    return await ctx.send(self.bot.bot_prefix + "Something went wrong with checking out the branch. Check the console for details.")
-                exit_code = subprocess.call(['git', 'pull', 'origin', branch])
-                if exit_code:
-                    return await ctx.send(self.bot.bot_prefix + "Something went wrong with pulling the branch. Check the console for details.")
-                await ctx.send(self.bot.bot_prefix + "Successfully checked out branch {} and pulled it!".format(branch))
+                exit_code = g.execute(['git', 'stash'])
+                if exit_code != "No local changes to save":
+                    await ctx.send(self.bot.bot_prefix + "Stashed changes to " + branchversion + ".")
+                exit_code = g.execute(['git', 'checkout', branch])
+                exit_code = g.execute(['git', 'pull', 'origin', branch])
+                if exit_code != "Already up-to-date.":
+                    await ctx.send(self.bot.bot_prefix + "Pulled latest changes to " + branch + ".")
+                stash = g.execute(['git', 'stash', 'list'])
+                if stash == "\n":
+                    exit_code = g.execute(['git', 'stash', 'apply'])
+                    await ctx.send(self.bot.bot_prefix + "Applied stashed changes")
+                print("exit code value:", exit_code)
+                await ctx.send(self.bot.bot_prefix + "Successfully checked out branch {}!".format(branch))
                 if os.name == 'nt':
                     os.system('cls')
                 else:
@@ -44,18 +46,28 @@ class Git:
                 print('User id:' + str(self.bot.user.id))
                 print('------')
                 print('Switched to branch ' + branch)
+                print(stash)
             else:
                 await ctx.send(self.bot.bot_prefix + "You're already on that branch!")
             
     @git.command(pass_context=True)
     async def pull(self, ctx):
         """Pull changes for the current branch"""
+        await ctx.message.delete()
         g = git.cmd.Git(working_dir=os.getcwd())
         branch = g.execute(["git", "rev-parse", "--abbrev-ref", "HEAD"])
-        exit_code = subprocess.call(['git', 'pull', 'origin', branch])
-        if exit_code:
-            return await ctx.send(self.bot.bot_prefix + "Something went wrong with pulling the branch. Check the console for details.")
-        await ctx.send(self.bot.bot_prefix + "Successfully pulled {}!".format(branch))
+        exit_code = g.execute(['git', 'pull', 'origin', branch])
+        if exit_code != "Already up-to-date.":
+            await ctx.send(self.bot.bot_prefix + "Pulled latest changes to " + branch + ".")
+        await ctx.send(self.bot.bot_prefix + "Successfully pulled {}!".format(branch), delete_after=10)
+        
+    @git.command(pass_context=True)
+    async def branch(self, ctx):
+        """Check current branch"""
+        await ctx.message.delete()
+        g = git.cmd.Git(working_dir=os.getcwd())
+        branch = g.execute(["git", "rev-parse", "--abbrev-ref", "HEAD"])
+        await ctx.send(self.bot.bot_prefix + "Current branch is: " + branch, delete_after=20)
         
 def setup(bot):
     bot.add_cog(Git(bot))
