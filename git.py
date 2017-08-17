@@ -3,6 +3,7 @@ import subprocess
 import os
 import git
 from discord.ext import commands
+import asyncio
 
 '''Code to switch between branches'''
 
@@ -25,11 +26,10 @@ class Git:
                 exit_code = g.execute(['git', 'pull', 'origin', branch])
                 if exit_code != "Already up-to-date.":
                     await ctx.send(self.bot.bot_prefix + "Pulled latest changes to " + branch + ".")
-                stash = g.execute(['git', 'stash', 'list'])
-                if stash == "\n":
-                    exit_code = g.execute(['git', 'stash', 'apply'])
-                    await ctx.send(self.bot.bot_prefix + "Applied stashed changes")
-                print("exit code value:", exit_code)
+                # stash = g.execute(['git', 'stash', 'list'])
+                # if stash == "\n":
+                    # exit_code = g.execute(['git', 'stash', 'apply'])
+                    # await ctx.send(self.bot.bot_prefix + "Applied stashed changes")
                 await ctx.send(self.bot.bot_prefix + "Successfully checked out branch {}!".format(branch))
                 if os.name == 'nt':
                     os.system('cls')
@@ -46,7 +46,7 @@ class Git:
                 print('User id:' + str(self.bot.user.id))
                 print('------')
                 print('Switched to branch ' + branch)
-                print(stash)
+                # print(stash)
             else:
                 await ctx.send(self.bot.bot_prefix + "You're already on that branch!")
             
@@ -58,8 +58,11 @@ class Git:
         branch = g.execute(["git", "rev-parse", "--abbrev-ref", "HEAD"])
         exit_code = g.execute(['git', 'pull', 'origin', branch])
         if exit_code != "Already up-to-date.":
-            await ctx.send(self.bot.bot_prefix + "Pulled latest changes to " + branch + ".")
-        await ctx.send(self.bot.bot_prefix + "Successfully pulled {}!".format(branch), delete_after=10)
+            await ctx.send(self.bot.bot_prefix + "Pulling latest changes to " + branch + "...", delete_after=15)
+            await asyncio.sleep(5)
+            await ctx.send(self.bot.bot_prefix + "Successfully pulled {}!".format(branch), delete_after=10)
+        else:
+            await ctx.send(self.bot.bot_prefix + "There were no changes to pull.", delete_after=10)
         
     @git.command(pass_context=True)
     async def branch(self, ctx):
