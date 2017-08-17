@@ -35,34 +35,39 @@ class AnonQuote:
                     return await ctx.send(self.bot.bot_prefix + "Could not find specified channel.")
             if not isinstance(channel, discord.channel.TextChannel):
                 return await ctx.send(self.bot.bot_prefix + "This command is only supported in server text channels.")
+            if user:
+                async for message in ctx.message.channel.history(limit=500):
+                    if message.author == user:
+                        result = message
+                        break
             try:
                 length = len(self.bot.all_log[str(ctx.message.channel.id) + ' ' + str(ctx.message.guild.id)])
             except:
                 pass
             else:
-                size = length if length < 201 else 200
-                for channel in ctx.message.guild.channels:
-                    if type(channel) == discord.channel.TextChannel:
-                        if str(channel.id) + ' ' + str(ctx.message.guild.id) in self.bot.all_log:
-                            for i in range(length - 2, length - size, -1):
-                                try:
-                                    search = self.bot.all_log[str(channel.id) + ' ' + str(ctx.message.guild.id)][i]
-                                except:
-                                    continue
-                                if (msg.lower().strip() in search[0].content.lower() and (
-                                        search[0].author != ctx.message.author or search[0].content[pre:7] != 'quote ')) or (
-                                    ctx.message.content[6:].strip() == str(search[0].id)) or (search[0].author == user and search[0].channel == ctx.message.channel):
-                                    result = search[0]
+                if not result:
+                    size = length if length < 201 else 200
+                    for channel in ctx.message.guild.channels:
+                        if type(channel) == discord.channel.TextChannel:
+                            if str(channel.id) + ' ' + str(ctx.message.guild.id) in self.bot.all_log:
+                                for i in range(length - 2, length - size, -1):
+                                    try:
+                                        search = self.bot.all_log[str(channel.id) + ' ' + str(ctx.message.guild.id)][i]
+                                    except:
+                                        continue
+                                    if (msg.lower().strip() in search[0].content.lower() and (
+                                            search[0].author != ctx.message.author or search[0].content[pre:7] != 'quote ')) or (
+                                        msg.strip() == str(search[0].id)):
+                                        result = search[0]
+                                        break
+                                if result:
                                     break
-                            if result:
-                                break
-
 
             if not result:
                 try:
                     async for sent_message in channel.history(limit=500):
                         if (msg.lower().strip() in sent_message.content and (
-                                sent_message.author != ctx.message.author or sent_message.content[pre:7] != 'quote ')) or (msg.strip() == str(sent_message.id)) or (msg.author == user):
+                                sent_message.author != ctx.message.author or sent_message.content[pre:7] != 'quote ')) or (msg.strip() == str(sent_message.id)):
                             result = sent_message
                             break
                 except:
@@ -80,8 +85,11 @@ class AnonQuote:
                 except:
                     pass
 
-
         if result:
+            if type(result.author) == discord.User:
+                sender = result.author.name
+            else:
+                sender = result.author.nick if result.author.nick else result.author.name
             if embed_perms(ctx.message) and result.content:
                 color = get_config_value("optional_config", "quoteembed_color")
                 if color == "auto":
@@ -91,10 +99,11 @@ class AnonQuote:
                 else:
                     color = int('0x' + color, 16)
                 em = discord.Embed(color=color, description=result.content, timestamp=result.created_at)
-                em.set_author(name="Anonymous")
                 await ctx.send(embed=em)
-            else:
+            elif result.content:
                 await ctx.send('%s - %s```%s```' % (sender, result.created_at, result.content))
+            else:
+                await ctx.send(self.bot.bot_prefix + "Embeds cannot be quoted.")
         else:
             await ctx.send(self.bot.bot_prefix + 'No quote found.')
             
