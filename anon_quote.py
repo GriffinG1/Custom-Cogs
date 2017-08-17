@@ -99,7 +99,7 @@ class AnonQuote:
                 else:
                     color = int('0x' + color, 16)
                 em = discord.Embed(color=color, description=result.content, timestamp=result.created_at)
-                em.set_author("Anonymous")
+                em.set_author(name="Anonymous")
                 await ctx.send(embed=em)
             elif result.content:
                 await ctx.send('%s - %s```%s```' % (sender, result.created_at, result.content))
