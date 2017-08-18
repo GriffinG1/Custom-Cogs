@@ -31,7 +31,7 @@ class Git:
                     try:
                         exit_code = g.execute(['git', 'stash', 'apply'])
                         if exit_code:
-                            await ctx.send(self.bot.bot_prefix + "Applied stashed changes")
+                            await ctx.send(self.bot.bot_prefix + "Applied stashed changes to " + branch + ".")
                     except:
                         return
                 await ctx.send(self.bot.bot_prefix + "Successfully checked out branch {}!".format(branch))
