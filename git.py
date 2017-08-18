@@ -31,9 +31,9 @@ class Git:
                     try:
                         exit_code = g.execute(['git', 'stash', 'apply'])
                         if exit_code:
-                            await ctx.send(self.bot.bot_prefix + "Applied stashed changes to " + branch + ".")
+                            await ctx.send(self.bot.bot_prefix + "Applied stashed changes")
                     except:
-                        return
+                        pass
                 await ctx.send(self.bot.bot_prefix + "Successfully checked out branch {}!".format(branch))
                 if os.name == 'nt':
                     os.system('cls')
@@ -76,5 +76,24 @@ class Git:
         branch = g.execute(["git", "rev-parse", "--abbrev-ref", "HEAD"])
         await ctx.send(self.bot.bot_prefix + "Current branch is: " + branch, delete_after=20)
         
+    @git.command(pass_context=True)
+    async def clear(self, ctx):
+        """Clear all stashed files"""
+        def check(msg):
+            if msg:
+                return (msg.content.lower().strip() == 'yes' or msg.content.lower().strip() == 'no') and msg.author == self.bot.user
+            else:
+                return False
+                
+        g = git.cmd.Git(working_dir=os.getcwd())
+        await ctx.send(self.bot.bot_prefix + "Are you sure you want to clear stashed files? `yes` or `no`.")
+        reply = await self.bot.wait_for("message", check=check)
+        if reply.content.lower() == "yes":
+            clear = g.execute(["git", "stash", "clear"])
+            await ctx.send(self.bot.bot_prefix + "Cleared stashed files.")
+        if reply.content.lower() == "no":
+            await ctx.send(self.bot.bot_prefix + "Canceled stash clearing.")
+            return
+    
 def setup(bot):
     bot.add_cog(Git(bot))
