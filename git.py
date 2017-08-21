@@ -48,8 +48,8 @@ class Git:
                 except:
                     pass
                 print('User id:' + str(self.bot.user.id))
+                print('Current branch is: ' + branch '.')
                 print('------')
-                print('Switched to branch ' + branch)
                 print(stash)
             else:
                 await ctx.send(self.bot.bot_prefix + "You're already on that branch!")
