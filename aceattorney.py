@@ -8,11 +8,6 @@ class AceAttorney:
 
     def __init__(self, bot):
         self.bot = bot
-
-    async def simple_embed(self, text, title="", color=discord.Color.default()):
-        embed = discord.Embed(title=title, color=color)
-        embed.description = text
-        await self.bot.say("", embed=embed)
 		
     @commands.command(pass_context=True)
     async def holy(self, ctx):
@@ -27,7 +22,7 @@ class AceAttorney:
         await ctx.message.delete()
         embed = discord.Embed(title="Miles Edgeworth", color=discord.Color.blue())
         embed.description = "This one single statement is so full of contradictions... For a moment there, I thought I was going to collapse."
-        await self.bot.say("", embed=embed)
+        await ctx.send("", embed=embed)
 
     @commands.command(pass_context=True)
     async def press(self, ctx):
