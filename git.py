@@ -47,7 +47,7 @@ class Git:
                     print(self.bot.user.name)
                 except:
                     pass
-                print('User id: ' + str(self.bot.user.id))
+                print('User id:' + str(self.bot.user.id))
                 print('Current branch is: ' + branch)
                 print('------')
                 print(stash)
@@ -76,7 +76,21 @@ class Git:
         branch = g.execute(["git", "rev-parse", "--abbrev-ref", "HEAD"])
         await ctx.send(self.bot.bot_prefix + "Current branch is: " + branch, delete_after=20)
         
-    @git.command(pass_context=True)
+        
+    @git.group(pass_context=True)
+    async def stash(self, ctx):
+        """Stash changes"""
+        if ctx.invoked_subcommand is None:
+            g = git.cmd.Git(working_dir=os.getcwd())
+            branch = g.execute(["git", "rev-parse", "--abbrev-ref", "HEAD"])
+            exit_code = g.execute(['git', 'stash'])
+            if exit_code != "No local changes to save":
+                await ctx.send(self.bot.bot_prefix + "Stashed changes to " + branch + ".")
+            else:
+                await ctx.send(self.bot.bot_prefix + "There was nothing to stash!")
+        
+        
+    @stash.command(pass_context=True)
     async def clear(self, ctx):
         """Clear all stashed files"""
         def check(msg):
