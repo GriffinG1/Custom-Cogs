@@ -89,12 +89,6 @@ class AceAttorney:
         """NOT GUILTY!"""
         await ctx.message.delete()
         await ctx.send( content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/KeggKe4.gif"))
-		
-	@commands.command(pass_context=True)
-	async def satorha(self, ctx):
-		"""Satorha!"""
-		await ctx.message.delete()
-		await ctx.send( content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/FMEzpJ7.png"))
-		
+
 def setup(bot):
     bot.add_cog(AceAttorney(bot))
