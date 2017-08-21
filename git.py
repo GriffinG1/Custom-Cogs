@@ -47,7 +47,7 @@ class Git:
                     print(self.bot.user.name)
                 except:
                     pass
-                print('User id:' + str(self.bot.user.id))
+                print('User id: ' + str(self.bot.user.id))
                 print('Current branch is: ' + branch)
                 print('------')
                 print(stash)
