@@ -90,7 +90,7 @@ class AceAttorney:
         await ctx.message.delete()
         await ctx.send( content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/KeggKe4.gif"))
 		
-@commands.command(pass_context=True)
+	@commands.command(pass_context=True)
 	async def satorha(self, ctx):
 		"""Satorha!"""
 		await ctx.message.delete()
