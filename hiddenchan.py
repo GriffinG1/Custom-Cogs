@@ -17,7 +17,7 @@ class HiddenChan:
         embed = discord.Embed(title="Hidden channels in {}".format(ctx.message.guild))
         for x in ctx.message.guild.channels:
             if not x.permissions_for(ctx.message.author).read_messages:
-                channels += "**#" + x.name + "** - " + x.topic + "\n"
+                channels += "**# {} ** - {} \n".format(x.name, x.topic)
                 hidden += 1
         embed.description = channels
         embed.set_footer(text="{} out of {} channels are hidden".format(hidden, total))
