@@ -21,7 +21,10 @@ class HiddenChan:
                 hidden += 1
         embed.description = channels
         embed.set_footer(text="{} out of {} channels are hidden".format(hidden, total))
-        await ctx.send(embed=embed)
+        if not channels:
+            await ctx.send(self.bot.bot_prefix + "There are no channels you cannot see!")
+        else:
+            await ctx.send(embed=embed)
         
 def setup(bot):
     bot.add_cog(HiddenChan(bot))
