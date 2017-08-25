@@ -15,7 +15,7 @@ class HiddenChan:
         channels = ""
         hidden = 0
         total = len(ctx.message.guild.channels)
-        embed = discord.Embed()
+        embed = discord.Embed(title="Hidden channels in {}".format(ctx.message.guild))
         for x in ctx.message.guild.channels:
             if not x.permissions_for(ctx.message.author).read_messages:
                 channels += "#" + x.name + "\n"
