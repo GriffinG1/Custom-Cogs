@@ -12,11 +12,15 @@ class HiddenChan:
     async def hiddenchan(self, ctx):
         """Show hidden channels"""
         channels = ""
+        hidden = 0
+        total = len(ctx.message.guild.channels)
         embed = discord.Embed()
         for x in ctx.message.guild.channels:
             if not x.permissions_for(ctx.message.author).read_messages:
                 channels += "#" + x.name + "\n"
+                hidden += 1
         embed.description = channels
+        embed.set_footer(text="{} out of {} channels are hidden".format(hidden, total))
         await ctx.send(embed=embed)
         
 def setup(bot):
