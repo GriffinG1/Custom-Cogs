@@ -11,6 +11,7 @@ class HiddenChan:
     @commands.command(aliases=['hc'], pass_context=True)
     async def hiddenchan(self, ctx):
         """Show hidden channels"""
+        await ctx.message.delete()
         channels = ""
         hidden = 0
         total = len(ctx.message.guild.channels)
