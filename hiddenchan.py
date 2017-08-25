@@ -19,10 +19,10 @@ class HiddenChan:
         for x in ctx.message.guild.channels:
             if not x.permissions_for(ctx.message.author).read_messages:
                 channels += "**# {} **".format(x.name)
-                if x.topic:
-                    channels += " - {} \n".format(x.topic)
+                if x.topic == "None" or not x.topic:
+                    channels += "\n\n"
                 else:
-                    channels += "\n"
+                    channels += " - {} \n\n".format(x.topic)
                 hidden += 1
         embed.description = channels
         embed.set_footer(text="{} out of {} channels are hidden".format(hidden, total))
