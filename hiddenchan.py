@@ -11,13 +11,18 @@ class HiddenChan:
     @commands.command(aliases=['hc'], pass_context=True)
     async def hiddenchan(self, ctx):
         """Show hidden channels"""
+        await ctx.message.delete()
         channels = ""
         hidden = 0
         total = len(ctx.message.guild.channels)
         embed = discord.Embed(title="Hidden channels in {}".format(ctx.message.guild))
         for x in ctx.message.guild.channels:
             if not x.permissions_for(ctx.message.author).read_messages:
-                channels += "**# {} ** - {} \n".format(x.name, x.topic)
+                channels += "**# {} **".format(x.name)
+                if x.topic:
+                    channels += " - {} \n".format(x.topic)
+                else:
+                    channels += "\n"
                 hidden += 1
         embed.description = channels
         embed.set_footer(text="{} out of {} channels are hidden".format(hidden, total))
