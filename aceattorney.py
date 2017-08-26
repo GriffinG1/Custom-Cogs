@@ -84,7 +84,7 @@ class AceAttorney:
         await ctx.message.delete()
         await ctx.send( content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/1kq5gau.gif"))
 
-    @commands.command(pass_context=True)
+    @commands.command(aliases=['ng'], pass_context=True)
     async def notguilty(self, ctx):
         """NOT GUILTY!"""
         await ctx.message.delete()
@@ -96,5 +96,41 @@ class AceAttorney:
         await ctx.message.delete()
         await ctx.send( content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/FMEzpJ7.png"))
 	
+    @commands.command(pass_context=True)
+    async def hang(self, ctx):
+        """Hang on!"""
+        await ctx.message.delete()
+        await ctx.send( content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/UQUjdnb.png"))
+	
+    @commands.command(pass_context=True)
+    async def look(self, ctx):
+        """Have a look!"""
+        await ctx.message.delete()
+        await ctx.send( content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/kcR7d5W.png"))
+    
+    @commands.command(pass_context=True)
+    async def welcome(self, ctx):
+        """Welcome!"""
+        await ctx.message.delete()
+        await ctx.send( content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/ZDQnh9D.png"))
+        
+    @commands.command(pass_context=True)
+    async def insolence(self, ctx):
+        """Such insolence!"""
+        await ctx.message.delete()
+        await ctx.send( content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/OIlktYf.png"))
+        
+    @commands.command(pass_context=True)
+    async def shut(self, ctx):
+        """Shut up!"""
+        await ctx.message.delete()
+        await ctx.send( content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://http://i.imgur.com/fk9ewJZ.png"))
+	
+    @comamnds.command(pass_context=True)
+    async def over(self, ctx):
+        """Overruled!"""
+        await ctx.message.delete()
+        await ctx.send( content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://i.imgur.com/pCLJvzU.png"))
+    
 def setup(bot):
     bot.add_cog(AceAttorney(bot))
