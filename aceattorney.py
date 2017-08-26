@@ -126,7 +126,7 @@ class AceAttorney:
         await ctx.message.delete()
         await ctx.send( content=None, embed=discord.Embed(color=discord.Color.blue()).set_image(url="http://http://i.imgur.com/fk9ewJZ.png"))
 	
-    @comamnds.command(pass_context=True)
+    @commands.command(pass_context=True)
     async def over(self, ctx):
         """Overruled!"""
         await ctx.message.delete()
