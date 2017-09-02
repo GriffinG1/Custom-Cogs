@@ -12,17 +12,15 @@ class HiddenChan:
     async def hiddenchan(self, ctx):
         """Show hidden channels"""
         await ctx.message.delete()
+        if type(ctx.channel) == discord.channel.DMChannel:
+            return await ctx.send(self.bot.bot_prefix + "This command *obviously* doesn't work in a DM, you peasant.")
         channels = ""
         nechannels = ""
         hidden = 0
-        if type(ctx.channel) != discord.channel.DMChannel:
-            total = len(ctx.message.guild.channels)
-        else:
-            await ctx.send(self.bot.bot_prefix + "This command *obviously* doesn't work in a DM, you peasant.")
-            return
+        total = len(ctx.guild.text_channels)
         embed = discord.Embed(title="Hidden channels in {}".format(ctx.message.guild))
-        for x in ctx.message.guild.channels:
-            if not x.permissions_for(ctx.message.author).read_messages:
+        for x in ctx.guild.text_channels:
+            if not x.permissions_for(ctx.author).read_messages:
                 channels += "**#{}**".format(x.name)
                 nechannels += "#{}".format(x.name)
                 if x.topic == "None" or not x.topic:
