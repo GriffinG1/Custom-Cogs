@@ -19,7 +19,7 @@ class NickScan:
         embed = discord.Embed(title="Servers I Have Nicknames In")
         embed.description = nick
         if nick == "":
-            await ctx.send(self.bot.bot_prefix + "You dont have any nicknames set!"
+            await ctx.send(self.bot.bot_prefix + "You dont have any nicknames set!")
         else:
             await ctx.send(embed=embed)
                 
