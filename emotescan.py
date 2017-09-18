@@ -13,18 +13,17 @@ class EmoteScan:
     async def emotescan(self, ctx, msg):
         """Scan all servers for a certain emote"""
         await ctx.message.delete()
-        server = ""
-        msg = msg.replace('<','').replace('>','').replace(':','')
-        print(msg)
-        for x in self.bot.guilds:
-            for y in x.emojis:
-                if y.name == msg:
-                    server += x.name + "\n"
-        if server is None:
-            await ctx.send(self.bot.bot_prefix + "Couldn't find that emote")
+        servers = ""
+        msg = msg.split(":")[1] if msg.startswith("<") else msg
+        for guild in self.bot.guilds:
+            for emoji in guild.emojis:
+                if emoji.name == msg:
+                    servers += guild.name + "\n"
+        if servers is None:
+            await ctx.send(self.bot.bot_prefix + "That emote is not on any of your servers.")
         else:
-            embed = discord.Embed(title="Servers with {} on it".format(msg))
-            embed.description = server
+            embed = discord.Embed(title="Servers with the {} emote".format(msg))
+            embed.description = servers
             await ctx.send(embed=embed)
 
 def setup(bot):
