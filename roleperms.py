@@ -14,9 +14,8 @@ class RolePerms:
         await ctx.message.delete()
         permissions = ""
         for perm in discord.utils.get(ctx.message.guild.roles, name=msg).permissions:
-            # perm.title()
-            # perm = perm.replace('\'', '**').replace('(','').replace(')', '').replace(',',':').replace('_',' ')
-            permissions += "**{}** {}\n".format(*perm)
+            perm = (perm[0].replace("_", " ").title(), perm[1])
+            permissions += "**{}**: {}\n".format(*perm)
         embed = discord.Embed(title="Permissions for role {}".format(msg))
         embed.description = permissions
         await ctx.send(embed=embed)
