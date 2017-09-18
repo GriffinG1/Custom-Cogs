@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-import re
 
 '''Scan a server for your emote'''
 
@@ -9,8 +8,8 @@ class EmoteScan:
     def __init__(self, bot):
         self.bot = bot
         
-    @commands.command(aliases=['emojiscan', 'es'])
-    async def emotescan(self, ctx, msg):
+    @commands.command(aliases=['es'])
+    async def emojiscan(self, ctx, msg):
         """Scan all servers for a certain emote"""
         await ctx.message.delete()
         servers = ""
