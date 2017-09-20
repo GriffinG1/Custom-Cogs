@@ -16,12 +16,13 @@ class RolePerms:
         for perm in discord.utils.get(ctx.message.guild.roles, name=msg).permissions:
             perm = (perm[0].replace("_", " ").title(), perm[1])
             permissions += "**{}**: {}\n".format(*perm)
+            permissionsne += "{}: {}\n".format(*perm)
         embed = discord.Embed(title="Permissions for role {}".format(msg))
         embed.description = permissions
         try:
             await ctx.send(embed=embed)
         except:
-            await ctx.send("```Permissions for role {}\n\n{}```".format(msg, permissions))
+            await ctx.send("```Permissions for role {}\n\n{}```".format(msg, permissionsne))
 
        
 def setup(bot):
