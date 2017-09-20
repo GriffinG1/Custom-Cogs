@@ -13,6 +13,7 @@ class RolePerms:
         """Get role perms! The role name must match exactly. Ex for a role "Admin", you'd do >roleperms Admin. If the role name contains a space, the role name must be in quotes."""
         await ctx.message.delete()
         permissions = ""
+        permissionsne = ""
         for perm in discord.utils.get(ctx.message.guild.roles, name=msg).permissions:
             perm = (perm[0].replace("_", " ").title(), perm[1])
             permissions += "**{}**: {}\n".format(*perm)
