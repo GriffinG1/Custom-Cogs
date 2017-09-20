@@ -21,7 +21,7 @@ class RolePerms:
         try:
             await ctx.send(embed=embed)
         except:
-            await ctx.send("```Permissions for role {}\n\n{}```".format(msg, permissions)
+            await ctx.send("```Permissions for role {}\n\n{}```".format(msg, permissions))
 
        
 def setup(bot):
