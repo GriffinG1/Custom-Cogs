@@ -13,15 +13,15 @@ class EmoteScan:
         """Scan all servers for a certain emote"""
         await ctx.message.delete()
         servers = ""
-        msg = msg.split(":")[1] if msg.startswith("<") else msg
+        emote = msg.split(":")[1] if msg.startswith("<") else msg
         for guild in self.bot.guilds:
             for emoji in guild.emojis:
-                if emoji.name == msg:
+                if emoji.name == emote:
                     servers += guild.name + "\n"
         if servers is None:
             await ctx.send(self.bot.bot_prefix + "That emote is not on any of your servers.")
         else:
-            embed = discord.Embed(title="Servers with the :{}: emote".format(msg))
+            embed = discord.Embed(title="Servers with the {} emote".format(msg))
             embed.description = servers
             await ctx.send(embed=embed)
 
