@@ -21,7 +21,7 @@ class EmoteScan:
         if servers is None:
             await ctx.send(self.bot.bot_prefix + "That emote is not on any of your servers.")
         else:
-            embed = discord.Embed(title="Servers with the {} emote".format(msg))
+            embed = discord.Embed(title="Servers with the :{}: emote".format(msg))
             embed.description = servers
             await ctx.send(embed=embed)
 
