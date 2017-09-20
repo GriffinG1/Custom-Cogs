@@ -18,7 +18,10 @@ class RolePerms:
             permissions += "**{}**: {}\n".format(*perm)
         embed = discord.Embed(title="Permissions for role {}".format(msg))
         embed.description = permissions
-        await ctx.send(embed=embed)
+        try:
+            await ctx.send(embed=embed)
+        except:
+            await ctx.send("```Permissions for role {}\n\n{}```".format(msg, permissions)
 
        
 def setup(bot):
