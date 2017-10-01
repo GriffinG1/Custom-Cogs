@@ -20,8 +20,11 @@ class NickScan:
         embed.description = nick
         if nick == "":
             await ctx.send(self.bot.bot_prefix + "You dont have any nicknames set!")
-        else:
+        elif len(nick) <= 2000:
+            embed.description = nick
             await ctx.send(embed=embed)
+        else:
+            await ctx.send("Currently, you have too many friends to scan. This will be fixed at a date TBD"):
                 
 def setup(bot):
     bot.add_cog(NickScan(bot))
