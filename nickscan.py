@@ -16,11 +16,10 @@ class NickScan:
         for guild in self.bot.guilds:
             if guild.get_member(self.bot.user.id).nick:
                 nick += "**Server:** `{}` **Nick:** `{}`\n".format(guild.name, guild.get_member(self.bot.user.id).nick)
-        embed = discord.Embed(title="Servers I Have Nicknames In")
-        embed.description = nick
-        if nick == "":
+        if not nick:
             await ctx.send(self.bot.bot_prefix + "You dont have any nicknames set!")
         elif len(nick) <= 2000:
+            embed = discord.Embed(title="Servers I Have Nicknames In")
             embed.description = nick
             await ctx.send(embed=embed)
         else:
