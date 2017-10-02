@@ -24,7 +24,7 @@ class NickScan:
             embed.description = nick
             await ctx.send(embed=embed)
         else:
-            await ctx.send("Currently, you have too many nicknames to scan. This will be fixed at a date TBD"):
+            await ctx.send("Currently, you have too many nicknames to scan. This will be fixed at a date TBD")
                 
 def setup(bot):
     bot.add_cog(NickScan(bot))
