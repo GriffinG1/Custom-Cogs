@@ -19,13 +19,12 @@ class ServerFriends:
                     friends += "<@" + str(user.id) + ">\n"
         if not friends:
             await ctx.send("You have no friends on this server ☹")
-        else:
+        elif len(friends) <= 2000:
             embed = discord.Embed(title="Friends on this server")
-            if len(friends) <= 2000:
-                embed.description = friends
-                await ctx.send(embed=embed)
-            else:
-                await ctx.send("Currently, you have too many friends to scan. This will be fixed at a date TBD")
+            embed.description = friends
+            await ctx.send(embed=embed)
+        else:
+            await ctx.send("Currently, you have too many friends to scan. This will be fixed at a date TBD")
             
 def setup(bot):
     bot.add_cog(ServerFriends(bot))
