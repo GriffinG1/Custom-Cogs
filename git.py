@@ -60,7 +60,10 @@ class Git:
         await ctx.message.delete()
         g = git.cmd.Git(working_dir=os.getcwd())
         branch = g.execute(["git", "rev-parse", "--abbrev-ref", "HEAD"])
-        exit_code = g.execute(['git', 'pull', 'origin', branch])
+        try:
+            exit_code = g.execute(['git', 'pull', 'origin', branch])
+        except:
+            return await ctx.send(self.bot.bot_prefix + "Couldn't pull changes, most likely due to files requiring stashing. Please run `git stash` then try again.")
         if exit_code != "Already up-to-date.":
             await ctx.send(self.bot.bot_prefix + "Pulling latest changes to " + branch + "...", delete_after=15)
             await asyncio.sleep(5)
@@ -97,7 +100,6 @@ class Git:
                 return (msg.content.lower().strip() == 'yes' or msg.content.lower().strip() == 'no') and msg.author == self.bot.user
             else:
                 return False
-                
         g = git.cmd.Git(working_dir=os.getcwd())
         await ctx.send(self.bot.bot_prefix + "Are you sure you want to clear stashed files? `yes` or `no`.")
         reply = await self.bot.wait_for("message", check=check)
@@ -107,6 +109,16 @@ class Git:
         if reply.content.lower() == "no":
             await ctx.send(self.bot.bot_prefix + "Canceled stash clearing.")
             return
+        
+    @stash.command()
+    async def appy(self, ctx):
+        """Apply stashed files"""
+        g = git.cmd.Git(working_dir=os.getcwd())
+        exit_code = g.execute(['git', 'stash', 'apply'])
+        if exit_code:
+            await ctx.send(self.bot.bot_prefix + "Applied stashed changes")
+        else:
+            await ctx.send(self.bot.bot_prefix + "There were no stashed changes to apply")
     
 def setup(bot):
     bot.add_cog(Git(bot))
