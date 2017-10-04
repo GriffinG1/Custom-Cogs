@@ -111,7 +111,7 @@ class Git:
             return
         
     @stash.command()
-    async def appy(self, ctx):
+    async def apply(self, ctx):
         """Apply stashed files"""
         g = git.cmd.Git(working_dir=os.getcwd())
         exit_code = g.execute(['git', 'stash', 'apply'])
