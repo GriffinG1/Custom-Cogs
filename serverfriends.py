@@ -13,18 +13,27 @@ class ServerFriends:
         """Check friends on the current server."""
         await ctx.message.delete()
         friends = ""
+        bool = True
         for user in ctx.guild.members:
+            if len(friends + "<@{}">\n".format(str(user.id))) > 2000:
+                break
             if user.relationship:
                 if user.relationship.type == discord.RelationshipType.friend:
-                    friends += "<@" + str(user.id) + ">\n"
+                    friends += "<@{}">\n".format(str(user.id))
         if not friends:
             await ctx.send("You have no friends on this server ☹")
-        elif len(friends) <= 2000:
-            embed = discord.Embed(title="Friends on this server")
-            embed.description = friends
-            await ctx.send(embed=embed)
         else:
-            await ctx.send("Currently, you have too many friends to scan. This will be fixed at a date TBD")
+            if len(friends) <= 1964:
+                friends += "**Could not print the rest, sorry.**"
+                bool = False
+            try:
+                embed = discord.Embed(title="Friends on this server")
+                embed.description = friends
+                await ctx.send(embed=embed)
+            except:
+               await ctx.send("```{}```".format(friends))
+            if bool == True
+                await ctx.send(self.bot.bot_prefix + "**Could not print the rest, sorry.**")
             
 def setup(bot):
     bot.add_cog(ServerFriends(bot))
