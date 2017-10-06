@@ -30,7 +30,7 @@ class NickScan:
                 embed.description = nick
                 await ctx.send(embed=embed)
             except:
-                await ctx.send("```{}```.format(nick))
+                await ctx.send("```{}```".format(nick))
             if bool == True:
                 await ctx.send(self.bot.bot_prefix + "**Could not print the rest, sorry.**")
                 
