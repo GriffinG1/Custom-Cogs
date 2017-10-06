@@ -15,11 +15,11 @@ class ServerFriends:
         friends = ""
         bool = True
         for user in ctx.guild.members:
-            if len(friends + "<@{}">\n".format(str(user.id))) > 2000:
+            if len(friends + "<@{}>\n".format(str(user.id))) > 2000:
                 break
             if user.relationship:
                 if user.relationship.type == discord.RelationshipType.friend:
-                    friends += "<@{}">\n".format(str(user.id))
+                    friends += "<@{}>\n".format(str(user.id))
         if not friends:
             await ctx.send("You have no friends on this server ☹")
         else:
