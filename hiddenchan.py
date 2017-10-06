@@ -20,7 +20,9 @@ class HiddenChan:
         total = len(ctx.guild.text_channels)
         embed = discord.Embed(title="Hidden channels in {}".format(ctx.message.guild))
         for x in ctx.guild.text_channels:
-            if not x.permissions_for(ctx.author).read_messages:
+            if len(channels + "{} - {}\n\n".format(x.name, x.topic)) > 2000:
+                break
+            elif not x.permissions_for(ctx.author).read_messages:
                 channels += "**#{}**".format(x.name)
                 nechannels += "#{}".format(x.name)
                 if x.topic == "None" or not x.topic:
@@ -30,16 +32,22 @@ class HiddenChan:
                     channels += " - {}\n\n".format(x.topic)
                     nechannels += " - {}\n\n".format(x.topic)
                 hidden += 1
-        embed.description = channels
-        footer = "{} out of {} channels are hidden".format(hidden, total)
-        embed.set_footer(text=footer)
         if not channels:
             await ctx.send(self.bot.bot_prefix + "There are no channels you cannot see!")
         else:
+            if len(channels) <= 1964:
+                channels += "**Could not print the rest, sorry.**"
+                nechannels += "**Could not print the rest, sorry.**"
+                bool = False
+            embed.description = channels
+            footer = "{} out of {} channels are hidden".format(hidden, total)
+            embed.set_footer(text=footer)
             try:
                 await ctx.send(embed=embed)
             except:
                 await ctx.send("```{}\n\n{}```".format(nechannels, footer))
+            if bool == False:
+                await ctx.send(self.bot.bot_prefix + "**Could not print the rest, sorry.**")
         
 def setup(bot):
     bot.add_cog(HiddenChan(bot))
