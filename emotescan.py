@@ -33,7 +33,7 @@ class EmoteScan:
                 await ctx.send(embed=embed)
             except:
                 await ctx.send("```{}```".format(servers))
-            if bool = True:
+            if bool == True:
                 await ctx.send(self.bot.bot_prefix + "**Could not print the rest, sorry**")
                 
 
