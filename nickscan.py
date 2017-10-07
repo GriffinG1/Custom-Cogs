@@ -13,7 +13,7 @@ class NickScan:
         """Get a list of all your nicknames!"""
         await ctx.message.delete()
         nick = ""
-        bool = True
+        bool = None
         for guild in self.bot.guilds:
             if len(nick + "**Server:** `{}` **Nick:** `{}`\n".format(guild.name, guild.get_member(self.bot.user.id).nick)) > 2000:
                 break
@@ -25,6 +25,8 @@ class NickScan:
             if len(nick) <= 1964:
                 nick += "**Could not print the rest, sorry.**"
                 bool = False
+            else:
+                bool = True
             try:
                 embed = discord.Embed(title="Servers I Have Nicknames In")
                 embed.description = nick
