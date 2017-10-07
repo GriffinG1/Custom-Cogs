@@ -12,7 +12,7 @@ class EmoteScan:
     async def emojiscan(self, ctx, msg):
         """Scan all servers for a certain emote"""
         await ctx.message.delete()
-        bool = True
+        bool = None
         servers = ""
         emote = msg.split(":")[1] if msg.startswith("<") else msg
         for guild in self.bot.guilds
@@ -27,6 +27,8 @@ class EmoteScan:
             if len(servers) <= 1964:
                 servers += "**Could not print the rest, sorry.**"
                 bool = False
+            else:
+                bool = True
             try:
                 embed = discord.Embed(title="Servers with the {} emote".format(msg))
                 embed.description = servers
