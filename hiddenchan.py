@@ -40,7 +40,7 @@ class HiddenChan:
             if len(channels) <= 1964 && bool == False:
                 channels += "**Could not print the rest, sorry.**"
                 nechannels += "**Could not print the rest, sorry.**"
-            else:
+            elif bool == False:
                 bool = True
             embed.description = channels
             footer = "{} out of {} channels are hidden".format(hidden, total)
