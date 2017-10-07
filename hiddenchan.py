@@ -37,7 +37,7 @@ class HiddenChan:
         if not channels:
             await ctx.send(self.bot.bot_prefix + "There are no channels you cannot see!")
         else:
-            if len(channels) <= 1964 && bool == False:
+            if len(channels) <= 1964 and bool == False:
                 channels += "**Could not print the rest, sorry.**"
                 nechannels += "**Could not print the rest, sorry.**"
             elif bool == False:
