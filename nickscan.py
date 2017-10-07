@@ -16,16 +16,16 @@ class NickScan:
         bool = None
         for guild in self.bot.guilds:
             if len(nick + "**Server:** `{}` **Nick:** `{}`\n".format(guild.name, guild.get_member(self.bot.user.id).nick)) > 2000:
+                bool = False
                 break
             if guild.get_member(self.bot.user.id).nick:
                 nick += "**Server:** `{}` **Nick:** `{}`\n".format(guild.name, guild.get_member(self.bot.user.id).nick)
         if not nick:
             await ctx.send(self.bot.bot_prefix + "You dont have any nicknames set!")
         else:
-            if len(nick) <= 1964:
+            if len(nick) <= 1964 && bool = False:
                 nick += "**Could not print the rest, sorry.**"
-                bool = False
-            else:
+            elif bool = False:
                 bool = True
             try:
                 embed = discord.Embed(title="Servers I Have Nicknames In")
