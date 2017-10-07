@@ -23,7 +23,7 @@ class NickScan:
         if not nick:
             await ctx.send(self.bot.bot_prefix + "You dont have any nicknames set!")
         else:
-            if len(nick) <= 1964 && bool = False:
+            if len(nick) <= 1964 and bool == False:
                 nick += "**Could not print the rest, sorry.**"
             elif bool == False:
                 bool = True
