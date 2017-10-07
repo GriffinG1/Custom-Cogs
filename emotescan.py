@@ -17,6 +17,7 @@ class EmoteScan:
         emote = msg.split(":")[1] if msg.startswith("<") else msg
         for guild in self.bot.guilds
             if len(servers + "{}\n".format(guild.name)) > 2000:
+                bool = False
                 break
             for emoji in guild.emojis:
                 if emoji.name == emote:
@@ -24,10 +25,9 @@ class EmoteScan:
         if servers is None:
             await ctx.send(self.bot.bot_prefix + "That emote is not on any of your servers.")
         else:
-            if len(servers) <= 1964:
+            if len(servers) <= 1964 and bool == False:
                 servers += "**Could not print the rest, sorry.**"
-                bool = False
-            else:
+            elif bool == False:
                 bool = True
             try:
                 embed = discord.Embed(title="Servers with the {} emote".format(msg))
