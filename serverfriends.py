@@ -13,7 +13,7 @@ class ServerFriends:
         """Check friends on the current server."""
         await ctx.message.delete()
         friends = ""
-        bool = True
+        bool = None
         for user in ctx.guild.members:
             if len(friends + "<@{}>\n".format(str(user.id))) > 2000:
                 break
@@ -26,6 +26,8 @@ class ServerFriends:
             if len(friends) <= 1964:
                 friends += "**Could not print the rest, sorry.**"
                 bool = False
+            else:
+                bool = True
             try:
                 embed = discord.Embed(title="Friends on this server")
                 embed.description = friends
