@@ -25,7 +25,7 @@ class NickScan:
         else:
             if len(nick) <= 1964 && bool = False:
                 nick += "**Could not print the rest, sorry.**"
-            elif bool = False:
+            elif bool == False:
                 bool = True
             try:
                 embed = discord.Embed(title="Servers I Have Nicknames In")
