@@ -22,6 +22,7 @@ class HiddenChan:
         embed = discord.Embed(title="Hidden channels in {}".format(ctx.message.guild))
         for x in ctx.guild.text_channels:
             if len(channels + "{} - {}\n\n".format(x.name, x.topic)) > 2000:
+                bool = False
                 break
             elif not x.permissions_for(ctx.author).read_messages:
                 channels += "**#{}**".format(x.name)
@@ -36,10 +37,9 @@ class HiddenChan:
         if not channels:
             await ctx.send(self.bot.bot_prefix + "There are no channels you cannot see!")
         else:
-            if len(channels) <= 1964:
+            if len(channels) <= 1964 && bool == False:
                 channels += "**Could not print the rest, sorry.**"
                 nechannels += "**Could not print the rest, sorry.**"
-                bool = False
             else:
                 bool = True
             embed.description = channels
