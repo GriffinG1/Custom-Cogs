@@ -12,7 +12,7 @@ class HiddenChan:
     async def hiddenchan(self, ctx):
         """Show hidden channels"""
         await ctx.message.delete()
-        bool = True
+        bool = None
         if type(ctx.channel) == discord.channel.DMChannel:
             return await ctx.send(self.bot.bot_prefix + "This command *obviously* doesn't work in a DM, you peasant.")
         channels = ""
@@ -40,6 +40,8 @@ class HiddenChan:
                 channels += "**Could not print the rest, sorry.**"
                 nechannels += "**Could not print the rest, sorry.**"
                 bool = False
+            else:
+                bool = True
             embed.description = channels
             footer = "{} out of {} channels are hidden".format(hidden, total)
             embed.set_footer(text=footer)
