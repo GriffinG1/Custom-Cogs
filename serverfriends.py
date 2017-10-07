@@ -16,6 +16,7 @@ class ServerFriends:
         bool = None
         for user in ctx.guild.members:
             if len(friends + "<@{}>\n".format(str(user.id))) > 2000:
+                bool = False
                 break
             if user.relationship:
                 if user.relationship.type == discord.RelationshipType.friend:
@@ -23,10 +24,9 @@ class ServerFriends:
         if not friends:
             await ctx.send("You have no friends on this server ☹")
         else:
-            if len(friends) <= 1964:
+            if len(friends) <= 1964 and bool == False:
                 friends += "**Could not print the rest, sorry.**"
-                bool = False
-            else:
+            elif bool == False:
                 bool = True
             try:
                 embed = discord.Embed(title="Friends on this server")
