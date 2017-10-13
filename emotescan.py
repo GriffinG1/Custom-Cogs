@@ -15,7 +15,7 @@ class EmoteScan:
         bool = None
         servers = ""
         emote = msg.split(":")[1] if msg.startswith("<") else msg
-        for guild in self.bot.guilds
+        for guild in self.bot.guilds:
             if len(servers + "{}\n".format(guild.name)) > 2000:
                 bool = False
                 break
