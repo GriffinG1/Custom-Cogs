@@ -65,9 +65,15 @@ class Git:
         except:
             return await ctx.send(self.bot.bot_prefix + "Couldn't pull changes, most likely due to files requiring stashing. Please run `git stash` then try again.")
         if exit_code != "Already up-to-date.":
-            await ctx.send(self.bot.bot_prefix + "Pulling latest changes to " + branch + "...", delete_after=15)
-            await asyncio.sleep(5)
-            await ctx.send(self.bot.bot_prefix + "Successfully pulled {}!".format(branch), delete_after=10)
+            await ctx.send(self.bot.bot_prefix + "Pulling latest changes to " + branch + "...")
+            await ctx.send(self.bot.bot_prefix + "Successfully pulled {}!".format(branch))
+            print('Restarting...')
+            with open('restart.txt', 'w', encoding="utf8") as re:
+                re.write(str(ctx.message.channel.id))
+            await ctx.send(self.bot.bot_prefix + "Restarting to apply changes...")
+            if self.bot.subpro:
+                self.bot.subpro.kill()
+            os._exit(0)
         else:
             await ctx.send(self.bot.bot_prefix + "There were no changes to pull.", delete_after=10)
         
