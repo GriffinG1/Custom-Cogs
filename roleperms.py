@@ -14,17 +14,19 @@ class RolePerms:
         await ctx.message.delete()
         permissions = ""
         permissionsne = ""
-        for perm in discord.utils.get(ctx.message.guild.roles, name=msg).permissions:
-            perm = (perm[0].replace("_", " ").title(), perm[1])
-            permissions += "**{}**: {}\n".format(*perm)
-            permissionsne += "{}: {}\n".format(*perm)
-        embed = discord.Embed(title="Permissions for role {}".format(msg))
-        embed.description = permissions
         try:
-            await ctx.send(embed=embed)
+            for perm in discord.utils.get(ctx.message.guild.roles, name=msg).permissions:
+                perm = (perm[0].replace("_", " ").title(), perm[1])
+                permissions += "**{}**: {}\n".format(*perm)
+                permissionsne += "{}: {}\n".format(*perm)
+            embed = discord.Embed(title="Permissions for role {}".format(msg))
+            embed.description = permissions
+            try:
+                await ctx.send(embed=embed)
+            except:
+                await ctx.send("```Permissions for role {}\n\n{}```".format(msg, permissionsne))
         except:
-            await ctx.send("```Permissions for role {}\n\n{}```".format(msg, permissionsne))
-
+            await ctx.send("Couldn't find role, are you sure you typed it correctly?\n\nYou typed: `{}`".format(msg))
        
 def setup(bot):
     bot.add_cog(RolePerms(bot))
