@@ -26,7 +26,7 @@ class RolePerms:
             except:
                 await ctx.send("```Permissions for role {}\n\n{}```".format(msg, permissionsne))
         except:
-            await ctx.send("Couldn't find role, are you sure you typed it correctly?\n\nYou typed: `{}`".format(msg))
+            await ctx.send(self.bot.bot_prefix + "```Couldn't find role, are you sure you typed it correctly?\n\nYou typed: '{}'```".format(msg))
        
 def setup(bot):
     bot.add_cog(RolePerms(bot))
