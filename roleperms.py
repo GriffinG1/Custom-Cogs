@@ -10,11 +10,11 @@ class RolePerms:
 
     @commands.command(aliases=['rp'])
     async def roleperms(self, ctx, *, msg):
-        """Get role perms! The role name must match exactly. Ex for a role "Admin", you'd do >roleperms Admin. If the role name contains a space, the role name must be in quotes."""
+        """Get role perms! The role name must match exactly. Ex for a role "Admin", you'd do >roleperms Admin."""
         await ctx.message.delete()
         permissions = ""
         permissionsne = ""
-        role=discord.utils.get(ctx.message.guild.roles, name = msg)
+        role = discord.utils.get(ctx.message.guild.roles, name=msg)
         try:
             for perm in role.permissions:
                 perm = (perm[0].replace("_", " ").title(), perm[1])
