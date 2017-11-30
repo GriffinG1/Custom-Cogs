@@ -1,6 +1,6 @@
 # Custom-Cogs
 
-Where I'm storing all my custom cogs for selfbots
+Where I'm storing all my custom cogs.
 
 
 Support server: https://discord.gg/h4CSktn
